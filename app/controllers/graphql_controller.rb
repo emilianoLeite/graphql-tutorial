@@ -4,10 +4,15 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     context = {
-      # Query context goes here, for example:
-      # current_user: current_user,
+      # we need to provide session and current user
+      session: session
+      # current_user: current_user
     }
-    result = GraphqlTutorialSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
+    result = GraphqlTutorialSchema.execute(
+      query, variables: variables, context: context,
+             operation_name: operation_name
+    )
+
     render json: result
   end
 
